@@ -7,6 +7,7 @@ Created on Mar 5, 2019
 #from nltk.corpus import wordnet as wn
 from nltk.corpus import wordnet as wn
 from nltk import word_tokenize, pos_tag
+from nltk.tokenize import sent_tokenize
 
 class similarity(object):
     '''
@@ -90,7 +91,30 @@ class similarity(object):
     def symmetric_sentence_similarity(sentence1, sentence2):
     #compute the symmetric sentence similarity using Wordnet
         return (similarity.sentence_similarity(sentence1, sentence2) + similarity.sentence_similarity(sentence2, sentence1)) / 2 
- 
+    
+    @staticmethod
+    def summaries_similarity(file1, file2):
+        print ('Performing summary similarity analysis...')
+        summary1 = open(file1, 'r').read()
+        summary1 = sent_tokenize(summary1) #split into sentences
+
+        
+        summary2 = open(file2, 'r').read()
+        summary2 = sent_tokenize(summary2) #split into sentences
+
+        
+        resultText = ''
+        for focus_sentence in summary1:
+            for sentence in summary2:
+                resultText += focus_sentence + ','+sentence + ',' + str(similarity.symmetric_sentence_similarity(focus_sentence, sentence)) + '\n'
+                #===============================================================
+                # print ("SymmetricSimilarity(\"%s\", \"%s\") = %s" % (
+                # focus_sentence, sentence, 
+                # similarity.symmetric_sentence_similarity(focus_sentence, sentence)))
+                #===============================================================
+        
+        return resultText
+        
 if __name__ == '__main__':   
 
      

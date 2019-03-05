@@ -25,6 +25,7 @@ class summary(object):
    
     @staticmethod
     def generateGraph(text,outputfile, outputdir, plotGraph = False):
+        print ('Generating Graph...')
         #Start by doing statistical parsing/tagging for 
         temp_file = os.path.join(outputdir, 'temp.json')
         path_stage1 = os.path.join(outputdir, outputfile.split("_")[0] + '_o1.json')
@@ -63,6 +64,7 @@ class summary(object):
             #===================================================================
     @staticmethod
     def summarize(path_stage1, path_stage2, path_stage3, wordlimit, phraselimit):
+        print ('Generating summary...')
         #Calculate a significance weight for each sentence, using MinHash to approximate a Jaccard distance from key phrases determined by TextRank    
         kernel = pytextrank.rank_kernel(path_stage2)
 

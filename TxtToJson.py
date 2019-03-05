@@ -39,10 +39,10 @@ class txtToJson(object):
             filename = ntpath.basename(fname[1]).split(".")[0] + ".json"
             new_path = os.path.join(jsonDir, filename)
             shutil.move(jname[1], new_path)
-        print ("Done with converting")
     
     @staticmethod
     def textTojson(text,jname):
+        print ("Converting Essay Text to Json...")
         with open(jname, 'w') as writer:
             out = '{ "id" : \"' + str(777) + '\", "text": \"' + text + '\"}'
             writer.write(out)
