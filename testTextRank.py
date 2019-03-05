@@ -9,15 +9,23 @@ import os, sys
 from glob import glob
 import pytextrank
 import networkx as nx
+from summary import summary
 import pylab as plt
+import re, ntpath
 
 if __name__ == '__main__':
     plotGraph = False  #For debugging purposes
     essayDir = "essays"
     jsonDir = "jsonessays"
+    summaryDir = "summaries"
     path = os.path.dirname(sys.argv[0])
     essay_path = os.path.join(path, essayDir)
     json_path = os.path.join(path, jsonDir)
+    summary_path = os.path.join(path, summaryDir)
+    
+    ### TUNNING PARAMETERS
+    wordlimit = 100
+    phraselimit = 10
     
     #Delete left over processed files
     name = glob(json_path + "/*.json")
@@ -27,60 +35,27 @@ if __name__ == '__main__':
         except OSError:
             pass
     
-    #Convert txts to Jsons
-    txtToJson.ttJson(essay_path,json_path, directory=True)
+    #Repeat process for all essay files
+    name = glob(essay_path + "/*.txt")
+    WORD = re.compile(r'[\w\.]+')
+    for fname in enumerate(name):   
+        text = open(fname[1], 'r').read()
+        text = " ".join(WORD.findall(text)) 
+        filename = ntpath.basename(fname[1]).split(".")[0] + "_o2.json"
+        path_stage1 = fname[1].split('.txt')[0] + '_o1.json'
+        summary.generateGraph(text, filename, json_path, plotGraph=False)
+        
+        #Generate summary    
+        path_stage2 = os.path.join(json_path, filename)
+        path_stage3 = path_stage2.replace('o2', 'o3')
+        path_stage1 = path_stage2.replace('o2', 'o1')
+        summarytext, keyconcepts = summary.summarize(path_stage1, path_stage2, path_stage3, 
+                                                     wordlimit=wordlimit, phraselimit=phraselimit)
+        filename = ntpath.basename(fname[1]).split(".")[0] + '_summary.txt'
+        summarypath = os.path.join(summaryDir, filename)
+        with open(summarypath, 'w') as f:
+            f.write(summarytext)
+        #Generate summary concept map
+        filename = ntpath.basename(fname[1]).split(".")[0] + "_o2.json"
+        summary.generateGraph(summarytext, filename, summary_path, plotGraph=True)
 
-    
-    #Repeat the process for each Json file in the essays dir
-    name = glob(json_path + "/*.json")
-    for fname in enumerate(name):
-        #Start by doing statistical parsing/tagging for 
-        path_stage1 = fname[1].split('.json')[0] + '_o1.json'
-        try:
-            os.remove(path_stage1)
-        except OSError:
-            pass
-        with open(path_stage1, 'w') as f:
-            for graf in pytextrank.parse_doc(pytextrank.json_iter(fname[1])):
-                f.write("%s\n" % pytextrank.pretty_print(graf._asdict()))
-                #print(pytextrank.pretty_print(graf))
-
-        #Collect and Normalize the key sentences from the parsed doc
-        graph, ranks = pytextrank.text_rank(path_stage1)
-        pytextrank.render_ranks(graph, ranks)
-        path_stage2 = path_stage1.replace('o1', 'o2')
-        try:
-            os.remove(path_stage2)
-        except OSError:
-            pass
-        with open(path_stage2, 'w') as f:
-            for rl in pytextrank.normalize_key_phrases(path_stage1, ranks):
-                f.write("%s\n" % pytextrank.pretty_print(rl._asdict()))
-                #print(pytextrank.pretty_print(rl))
-        if plotGraph:
-            nx.draw(graph, with_labels = True)  
-            plt.show()      
-            
-        #Calculate a significance weight for each sentence, using MinHash to approximate a Jaccard distance from key phrases determined by TextRank    
-        kernel = pytextrank.rank_kernel(path_stage2)
-        path_stage3 = path_stage1.replace('o1', 'o3')
-        try:
-            os.remove(path_stage3)
-        except OSError:
-            pass
-        with open(path_stage3, 'w') as f:
-            for s in pytextrank.top_sentences(kernel, path_stage1):
-                f.write(pytextrank.pretty_print(s._asdict()))
-                f.write("\n")
-                #print(pytextrank.pretty_print(s._asdict()))
-        
-        #Summarize essay based on most significant sentences and key phrases
-        phrases = ", ".join(set([p for p in pytextrank.limit_keyphrases(path_stage2, phrase_limit=12)]))
-        sent_iter = sorted(pytextrank.limit_sentences(path_stage3, word_limit=150), key=lambda x: x[1])
-        s = []
-        
-        for sent_text, idx in sent_iter:
-            s.append(pytextrank.make_sentence(sent_text))
-        
-        graf_text = " ".join(s)
-        print("**excerpts:** %s\n\n**keywords:** %s" % (graf_text, phrases,))
