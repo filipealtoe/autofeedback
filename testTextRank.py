@@ -4,13 +4,9 @@ Created on Mar 4, 2019
 @author: filipe
 '''
 
-from TxtToJson import txtToJson
 import os, sys
 from glob import glob
-import pytextrank
-import networkx as nx
 from summary import summary
-import pylab as plt
 import re, ntpath
 from similarity import similarity
 
@@ -48,7 +44,7 @@ if __name__ == '__main__':
         text = " ".join(WORD.findall(text)) 
         filename = ntpath.basename(fname[1]).split(".")[0] + "_o2.json"
         path_stage1 = fname[1].split('.txt')[0] + '_o1.json'
-        summary.generateGraph(text, filename, json_path, plotGraph=False)
+        summary.generateGraph(text, filename, json_path, plotGraph=True)
         
         #Generate summary    
         path_stage2 = os.path.join(json_path, filename)
@@ -78,4 +74,5 @@ if __name__ == '__main__':
         with open(rubricFile, 'w') as f:
                 f.write(rubricresults['rubrictext'])
         print ('Rubric File created...')
+        print ('Similarity value of selected rubric: ' + str(rubricresults['maxsimilarity']))
     

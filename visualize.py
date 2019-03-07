@@ -3,7 +3,7 @@ Created on Mar 5, 2019
 
 @author: filipe
 '''
-from graphviz import Digraph
+import networkx as nx
 
 class visualize(object):
     '''
@@ -17,10 +17,5 @@ class visualize(object):
         '''
     @staticmethod
     def plotGraph(graph):    
-        u = Digraph('unix', filename='unix.gv')
-        u.attr(size='6,6')
-        u.node_attr.update(color='lightblue2', style='filled')
-        
-        u.edge('5th Edition', '6th Edition')
-        
-        u.view()
+         
+        nx.draw_spring(graph)

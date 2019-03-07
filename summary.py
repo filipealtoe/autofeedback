@@ -11,6 +11,7 @@ from TxtToJson import txtToJson
 from visualize import visualize
 import matplotlib
 import networkx
+from util import util
 
 class summary(object):
     '''
@@ -53,10 +54,12 @@ class summary(object):
             pass
         
         if plotGraph:
-#            visualize.plotGraph(graph)
-            matplotlib.rcParams['figure.figsize'] = (15.0, 15.0)
-            networkx.draw_networkx(graph)
-            plt.show()
+            visualize.plotGraph(graph)
+            #===================================================================
+            # matplotlib.rcParams['figure.figsize'] = (15.0, 15.0)
+            # networkx.draw_networkx(graph)
+            # plt.show()
+            #===================================================================
             #===================================================================
             # nx.draw(graph, with_labels = True)  
             # plt.show()   
@@ -89,3 +92,17 @@ class summary(object):
         graf_text = " ".join(s)
         #print("**excerpts:** %s\n\n**keywords:** %s" % (graf_text, phrases,))
         return graf_text, phrases
+    
+    @staticmethod
+    def debug_generate_Graph(fileDir, fileName, plotGraph = True):
+        filePath = os.path.join(Dir, fileName)
+        with open(filePath, 'r') as f:
+            text = f.read()
+        summary.generateGraph(text,fileName, fileDir, plotGraph)   
+
+if __name__ == '__main__':  
+    
+    #Read existing summary text, graph it and plot it
+    Dir = util.get_path('rubric')
+    fileName = 'rubric.txt'
+    summary.debug_generate_Graph(Dir, fileName)
