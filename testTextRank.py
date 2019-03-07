@@ -9,6 +9,7 @@ from glob import glob
 from summary import summary
 import re, ntpath
 from similarity import similarity
+from conceptmap import conceptmap
 
 if __name__ == '__main__':
 
@@ -44,7 +45,7 @@ if __name__ == '__main__':
         text = " ".join(WORD.findall(text)) 
         filename = ntpath.basename(fname[1]).split(".")[0] + "_o2.json"
         path_stage1 = fname[1].split('.txt')[0] + '_o1.json'
-        summary.generateGraph(text, filename, json_path, plotGraph=True)
+        summary.generateGraph(text, filename, json_path, plotGraph=False)
         
         #Generate summary    
         path_stage2 = os.path.join(json_path, filename)
@@ -75,4 +76,5 @@ if __name__ == '__main__':
                 f.write(rubricresults['rubrictext'])
         print ('Rubric File created...')
         print ('Similarity value of selected rubric: ' + str(rubricresults['maxsimilarity']))
-    
+    #Generating Concept
+    #conceptmap.generate_conceptmap(rubricresults['rubrictext'], rubric_path, plotConceptMap=True)

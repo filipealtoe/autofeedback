@@ -10,6 +10,7 @@ import numpy as np
 from nltk.tokenize import sent_tokenize, word_tokenize
 from operator import itemgetter
 from visualize import visualize
+from summary import summary
 
 class conceptmap(object):
     '''
@@ -47,9 +48,13 @@ class conceptmap(object):
     def get_ngram_sentences(text, ngramtext):
         ngramsentences = []
         sentences = sent_tokenize(text)
-        for element in ngramtext:
-            for sentence in sentences:
-                if (element in sentence): ngramsentences.append(sentence)
+        while(len(sentences) != 0):
+            sentence = sentences.pop(0)
+            for element in ngramtext:
+                #for sentence in sentences:
+                    if (element in sentence): 
+                        ngramsentences.append(sentence)
+                        break
         singlegramsentences = list(set(sentences) - set(ngramsentences))        
         return ngramsentences, singlegramsentences
     
@@ -58,25 +63,6 @@ class conceptmap(object):
         '''
         it gets the top ranked element
         '''
-        #=======================================================================
-        # ids = np.array([d['ids'] for d in jsonobj])
-        # counts = np.array([d['count'] for d in jsonobj])
-        # texts = np.array([d['text'] for d in jsonobj])
-        # idcount = []
-        # for i in range(0,len(ids)):
-        #     idcount.append([ids[i], counts[i], texts[i]])
-        # idcount.sort(key=itemgetter(1)) #sort on count
-        # idcount.reverse()
-        # continueTrying = True
-        # while (len(ids)!=0 and continueTrying):            
-        #     nextid = np.array([idcount.pop(0)[0][0]])
-        #     for line in idcount:
-        #         testid = np.array(line[0])
-        #         if ((np.sum((nextid == testid))) == nextid.shape[0]):
-        #             continueTrying = False
-        #             break             
-        # return line[2]
-        #=======================================================================
         return jsonobj[0]
     
     
@@ -165,18 +151,50 @@ class conceptmap(object):
     def build_graph(triplets):
         pass
     
+    @staticmethod
+    def generate_conceptmap(summarytext, outputdir, plotConceptMap=True, savetriplets=False):
+        '''
+        This is the main method that will generate the concept map based on the supplied input text
+        '''
+        graphoutputfile = "rubric_o2.json"
+        summary.generateGraph(summarytext, graphoutputfile, outputdir, plotGraph = False)
+        jsonFile = os.path.join(outputdir, graphoutputfile)
+        jsonobj = conceptmap.open_text_json(jsonFile)
+        ngramids, ngramtext, ngrampos = conceptmap.retrieve_ngram_params(jsonobj)
+        topconcept = conceptmap.get_top_node(jsonobj)
+        ngramsentences, singlegramsentences = conceptmap.get_ngram_sentences(summarytext, ngramtext)
+        allsentences = ngramsentences + singlegramsentences
+        firstsentence = True
+        for sentence in allsentences:
+            test = (conceptmap.process_sentence(sentence, jsonobj))
+            if (firstsentence):
+                sentencetriplets = test
+                firstsentence = False
+            else: sentencetriplets += test
+        if savetriplets:
+            tripletsFile = os.path.join(outputdir, "triplets.json")
+            with open(tripletsFile, 'w') as f:
+                f.write(str(sentencetriplets))
+        if plotConceptMap:
+            visualize.plotGraph(sentencetriplets)
+        
+    
 if __name__ == '__main__':
     jsonFile = os.path.join(util.get_path('jsonessays'), 'rubric_o2.json')
-    summaryFile = os.path.join(util.get_path('rubric'), 'rubric.txt')
+    outputdir = util.get_path('rubric')
+    summaryFile = os.path.join(outputdir, 'rubric.txt')
     with open(summaryFile, 'r') as f:
         summarytext = f.read()
-    jsonobj = conceptmap.open_text_json(jsonFile)
-    ngramids, ngramtext, ngrampos = conceptmap.retrieve_ngram_params(jsonobj)
-    topconcept = conceptmap.get_top_node(jsonobj)
-    ngramsentences, singlegramsentences = conceptmap.get_ngram_sentences(summarytext, ngramtext)
-    allsentences = ngramsentences + singlegramsentences
-    sentencetriplets = []
-    for sentence in allsentences:
-        sentencetriplets += (conceptmap.process_sentence(sentence, jsonobj))
-    visualize.plotGraph(sentencetriplets)
+    conceptmap.generate_conceptmap(summarytext, outputdir, plotConceptMap=True, savetriplets=False)
+    #===========================================================================
+    # jsonobj = conceptmap.open_text_json(jsonFile)
+    # ngramids, ngramtext, ngrampos = conceptmap.retrieve_ngram_params(jsonobj)
+    # topconcept = conceptmap.get_top_node(jsonobj)
+    # ngramsentences, singlegramsentences = conceptmap.get_ngram_sentences(summarytext, ngramtext)
+    # allsentences = ngramsentences + singlegramsentences
+    # sentencetriplets = []
+    # for sentence in allsentences:
+    #     sentencetriplets += (conceptmap.process_sentence(sentence, jsonobj))
+    # visualize.plotGraph(sentencetriplets)
+    #===========================================================================
     pass

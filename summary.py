@@ -54,17 +54,12 @@ class summary(object):
             pass
         
         if plotGraph:
-            visualize.plotGraph(graph)
-            #===================================================================
-            # matplotlib.rcParams['figure.figsize'] = (15.0, 15.0)
-            # networkx.draw_networkx(graph)
-            # plt.show()
-            #===================================================================
-            #===================================================================
-            # nx.draw(graph, with_labels = True)  
-            # plt.show()   
-            # 
-            #===================================================================
+            matplotlib.rcParams['figure.figsize'] = (15.0, 15.0)
+            networkx.draw_networkx(graph)
+            plt.show()
+            nx.draw(graph, with_labels = True)  
+            plt.show()   
+             
     @staticmethod
     def summarize(path_stage1, path_stage2, path_stage3, wordlimit, phraselimit):
         print ('Generating summary...')

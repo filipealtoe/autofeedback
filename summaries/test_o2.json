@@ -1,56 +1,56 @@
-{"count": 1, "ids": [12, 43, 14], "pos": "np", "rank": 0.1203580727215953, "text": "data breach companies"}
-{"count": 1, "ids": [12], "pos": "np", "rank": 0.06017903636079765, "text": "data"}
-{"count": 1, "ids": [21, 22], "pos": "np", "rank": 0.056624480840906065, "text": "confusing terms"}
-{"count": 1, "ids": [24], "pos": "np", "rank": 0.04520859772301235, "text": "customers"}
-{"count": 1, "ids": [35, 36], "pos": "np", "rank": 0.041703685584025936, "text": "individual consent"}
-{"count": 1, "ids": [12, 14], "pos": "np", "rank": 0.040119357573865096, "text": "data companies"}
-{"count": 2, "ids": [9, 10], "pos": "np", "rank": 0.03632631040827481, "text": "european citizens"}
-{"count": 1, "ids": [12, 45, 46], "pos": "np", "rank": 0.03471714166351671, "text": "data protection authority"}
-{"count": 1, "ids": [14], "pos": "np", "rank": 0.03433175823278298, "text": "companies"}
-{"count": 2, "ids": [4], "pos": "np", "rank": 0.02978055173307837, "text": "legislation"}
-{"count": 1, "ids": [65, 66, 67], "pos": "np", "rank": 0.02853276502102464, "text": "annual global turnover"}
-{"count": 2, "ids": [22], "pos": "nn", "rank": 0.028312240420453032, "text": "term"}
-{"count": 2, "ids": [36], "pos": "nn", "rank": 0.020851842792012968, "text": "consent"}
-{"count": 1, "ids": [70, 71], "pos": "np", "rank": 0.019830347781916013, "text": "bigger impact"}
-{"count": 1, "ids": [59], "pos": "np", "rank": 0.019623748058848273, "text": "consequences"}
-{"count": 1, "ids": [11], "pos": "vbg", "rank": 0.01792468025064694, "text": "concerning"}
-{"count": 2, "ids": [10], "pos": "nns", "rank": 0.01777388512591941, "text": "citizens"}
-{"count": 2, "ids": [26], "pos": "vb", "rank": 0.0176452556114408, "text": "give"}
-{"count": 1, "ids": [46], "pos": "nn", "rank": 0.017358570831758353, "text": "authority"}
-{"count": 2, "ids": [18], "pos": "vbg", "rank": 0.015301094196554739, "text": "collecting"}
-{"count": 1, "ids": [25], "pos": "vb", "rank": 0.014415335683302126, "text": "agree"}
-{"count": 1, "ids": [56], "pos": "np", "rank": 0.0143183637581991, "text": "limits"}
-{"count": 1, "ids": [67], "pos": "nn", "rank": 0.01426638251051232, "text": "turnover"}
-{"count": 1, "ids": [17], "pos": "np", "rank": 0.013979275291861479, "text": "business"}
-{"count": 1, "ids": [47], "pos": "np", "rank": 0.013010906509522031, "text": "insight"}
-{"count": 2, "ids": [48], "pos": "vbg", "rank": 0.012012415306040808, "text": "storing"}
-{"count": 1, "ids": [28], "pos": "nns", "rank": 0.011994020345156228, "text": "conditions"}
-{"count": 1, "ids": [45], "pos": "nn", "rank": 0.011284740780202668, "text": "protection"}
-{"count": 1, "ids": [60], "pos": "vbg", "rank": 0.010991031482015395, "text": "following"}
-{"count": 1, "ids": [7, 8], "pos": "np", "rank": 0.010767099685602199, "text": "more rights"}
-{"count": 1, "ids": [15], "pos": "np", "rank": 0.010607700600254734, "text": "entity"}
-{"count": 2, "ids": [43], "pos": "vbg", "rank": 0.010499106641575016, "text": "breaching"}
-{"count": 1, "ids": [64], "pos": "nn", "rank": 0.010464961985125188, "text": "percent"}
-{"count": 1, "ids": [71], "pos": "nn", "rank": 0.009915173890958006, "text": "impact"}
-{"count": 1, "ids": [5], "pos": "vbn", "rank": 0.008913456659295445, "text": "passed"}
-{"count": 1, "ids": [57], "pos": "nn", "rank": 0.008736518915793433, "text": "amount"}
-{"count": 1, "ids": [44], "pos": "vb", "rank": 0.008278659663226018, "text": "notify"}
-{"count": 1, "ids": [53], "pos": "vb", "rank": 0.008064279362723588, "text": "erase"}
-{"count": 1, "ids": [54], "pos": "nn", "rank": 0.007766363927348941, "text": "time"}
-{"count": 1, "ids": [63], "pos": "vbn", "rank": 0.007318112317171493, "text": "fined"}
-{"count": 1, "ids": [62], "pos": "nn", "rank": 0.007231704294803314, "text": "law"}
-{"count": 1, "ids": [13], "pos": "vbz", "rank": 0.006870123888390157, "text": "affects"}
-{"count": 1, "ids": [52], "pos": "vb", "rank": 0.006494690715326174, "text": "ask"}
-{"count": 1, "ids": [41], "pos": "vb", "rank": 0.005390372707170843, "text": "withdraw"}
-{"count": 1, "ids": [8], "pos": "nns", "rank": 0.005383549842801099, "text": "rights"}
-{"count": 1, "ids": [55], "pos": "vb", "rank": 0.005303850300127367, "text": "put"}
-{"count": 1, "ids": [58], "pos": "vb", "rank": 0.005303850300127367, "text": "suffer"}
-{"count": 1, "ids": [68], "pos": "np", "rank": 0.0053023162996055605, "text": "euros"}
-{"count": 1, "ids": [49], "pos": "np", "rank": 0.0053023162996055605, "text": "data"}
-{"count": 1, "ids": [1], "pos": "np", "rank": 0.0053023162996055605, "text": "gdpr"}
-{"count": 1, "ids": [69], "pos": "vbg", "rank": 0.004904669312877585, "text": "depending"}
-{"count": 1, "ids": [3], "pos": "nn", "rank": 0.004807895168938761, "text": "piece"}
-{"count": 1, "ids": [61], "pos": "vbd", "rank": 0.0037781640821269724, "text": "caught"}
-{"count": 1, "ids": [19], "pos": "vbz", "rank": 0.0032145359405714815, "text": "prevents"}
-{"count": 1, "ids": [6], "pos": "vb", "rank": 0.0026511581498027802, "text": "provide"}
-{"count": 1, "ids": [42], "pos": "nns", "rank": 0.0026511581498027802, "text": "hours"}
+{"count": 1, "ids": [12], "pos": "np", "rank": 0.11989565238080327, "text": "data"}
+{"count": 1, "ids": [12, 14], "pos": "np", "rank": 0.0683997085965464, "text": "data companies"}
+{"count": 1, "ids": [21, 22], "pos": "np", "rank": 0.05640692740942007, "text": "confusing terms"}
+{"count": 1, "ids": [24], "pos": "np", "rank": 0.045034904553181, "text": "customers"}
+{"count": 1, "ids": [35, 36], "pos": "np", "rank": 0.041543458421327374, "text": "individual consent"}
+{"count": 1, "ids": [12, 45, 46], "pos": "np", "rank": 0.03996521746026776, "text": "data protection authority"}
+{"count": 2, "ids": [9, 10], "pos": "np", "rank": 0.03618674332765557, "text": "european citizens"}
+{"count": 1, "ids": [14], "pos": "np", "rank": 0.0341998542982732, "text": "companies"}
+{"count": 1, "ids": [12, 43, 14], "pos": "np", "rank": 0.029973913095200817, "text": "data breach companies"}
+{"count": 2, "ids": [4], "pos": "np", "rank": 0.029666133708844637, "text": "legislation"}
+{"count": 1, "ids": [65, 66, 67], "pos": "np", "rank": 0.028423141041291417, "text": "annual global turnover"}
+{"count": 2, "ids": [22], "pos": "nn", "rank": 0.028203463704710035, "text": "term"}
+{"count": 2, "ids": [36], "pos": "nn", "rank": 0.020771729210663687, "text": "consent"}
+{"count": 1, "ids": [70, 71], "pos": "np", "rank": 0.019754158823651877, "text": "bigger impact"}
+{"count": 1, "ids": [59], "pos": "np", "rank": 0.01954835286465984, "text": "consequences"}
+{"count": 1, "ids": [11], "pos": "vbg", "rank": 0.01785581294027329, "text": "concerning"}
+{"count": 2, "ids": [10], "pos": "nns", "rank": 0.017705597176210064, "text": "citizens"}
+{"count": 2, "ids": [26], "pos": "vb", "rank": 0.01757746186126935, "text": "give"}
+{"count": 1, "ids": [46], "pos": "nn", "rank": 0.017291878535527824, "text": "authority"}
+{"count": 2, "ids": [18], "pos": "vbg", "rank": 0.015242306804626085, "text": "collecting"}
+{"count": 1, "ids": [25], "pos": "vb", "rank": 0.014359951409621347, "text": "agree"}
+{"count": 1, "ids": [56], "pos": "np", "rank": 0.014263352054381225, "text": "limits"}
+{"count": 1, "ids": [67], "pos": "nn", "rank": 0.014211570520645709, "text": "turnover"}
+{"count": 1, "ids": [17], "pos": "np", "rank": 0.01392556637896254, "text": "business"}
+{"count": 1, "ids": [47], "pos": "np", "rank": 0.012960918106699535, "text": "insight"}
+{"count": 2, "ids": [48], "pos": "vbg", "rank": 0.011966263144794393, "text": "storing"}
+{"count": 1, "ids": [28], "pos": "nns", "rank": 0.011947938858056452, "text": "conditions"}
+{"count": 1, "ids": [45], "pos": "nn", "rank": 0.011241384372449268, "text": "protection"}
+{"count": 1, "ids": [60], "pos": "vbg", "rank": 0.010948803516672963, "text": "following"}
+{"count": 1, "ids": [7, 8], "pos": "np", "rank": 0.010725732074827351, "text": "more rights"}
+{"count": 1, "ids": [15], "pos": "np", "rank": 0.010566945406891542, "text": "entity"}
+{"count": 2, "ids": [43], "pos": "vbg", "rank": 0.01045876867037437, "text": "breaching"}
+{"count": 1, "ids": [64], "pos": "nn", "rank": 0.010424755199006812, "text": "percent"}
+{"count": 1, "ids": [71], "pos": "nn", "rank": 0.009877079411825938, "text": "impact"}
+{"count": 1, "ids": [5], "pos": "vbn", "rank": 0.008879210816263706, "text": "passed"}
+{"count": 1, "ids": [57], "pos": "nn", "rank": 0.008702952874371998, "text": "amount"}
+{"count": 1, "ids": [44], "pos": "vb", "rank": 0.008246852734648608, "text": "notify"}
+{"count": 1, "ids": [53], "pos": "vb", "rank": 0.008033296091499408, "text": "erase"}
+{"count": 1, "ids": [54], "pos": "nn", "rank": 0.007736525258676447, "text": "time"}
+{"count": 1, "ids": [63], "pos": "vbn", "rank": 0.007289995848411739, "text": "fined"}
+{"count": 1, "ids": [62], "pos": "nn", "rank": 0.007203919808986184, "text": "law"}
+{"count": 1, "ids": [13], "pos": "vbz", "rank": 0.006843728608390109, "text": "affects"}
+{"count": 1, "ids": [52], "pos": "vb", "rank": 0.006469737864005042, "text": "ask"}
+{"count": 1, "ids": [41], "pos": "vb", "rank": 0.005369662688076305, "text": "withdraw"}
+{"count": 1, "ids": [8], "pos": "nns", "rank": 0.0053628660374136754, "text": "rights"}
+{"count": 1, "ids": [58], "pos": "vb", "rank": 0.005283472703445771, "text": "suffer"}
+{"count": 1, "ids": [55], "pos": "vb", "rank": 0.005283472703445771, "text": "put"}
+{"count": 1, "ids": [1], "pos": "np", "rank": 0.0052819445966129225, "text": "gdpr"}
+{"count": 1, "ids": [49], "pos": "np", "rank": 0.0052819445966129225, "text": "data"}
+{"count": 1, "ids": [68], "pos": "np", "rank": 0.0052819445966129225, "text": "euros"}
+{"count": 1, "ids": [69], "pos": "vbg", "rank": 0.004885825384889645, "text": "depending"}
+{"count": 1, "ids": [3], "pos": "nn", "rank": 0.004789423050930892, "text": "piece"}
+{"count": 1, "ids": [61], "pos": "vbd", "rank": 0.0037636482305274986, "text": "caught"}
+{"count": 1, "ids": [19], "pos": "vbz", "rank": 0.003202185569952257, "text": "prevents"}
+{"count": 1, "ids": [42], "pos": "nns", "rank": 0.0026409722983064612, "text": "hours"}
+{"count": 1, "ids": [6], "pos": "vb", "rank": 0.0026409722983064612, "text": "provide"}
