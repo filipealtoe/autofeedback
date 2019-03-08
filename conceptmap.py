@@ -152,7 +152,7 @@ class conceptmap(object):
         pass
     
     @staticmethod
-    def generate_conceptmap(summarytext, outputdir, plotConceptMap=True, savetriplets=False):
+    def generate_conceptmap(summarytext, outputdir, plotConceptMap=True, savetriplets=False, separateClusters=False):
         '''
         This is the main method that will generate the concept map based on the supplied input text
         '''
@@ -165,8 +165,12 @@ class conceptmap(object):
         ngramsentences, singlegramsentences = conceptmap.get_ngram_sentences(summarytext, ngramtext)
         allsentences = ngramsentences + singlegramsentences
         firstsentence = True
+        clustersentences = []
+        u = None
         for sentence in allsentences:
             test = (conceptmap.process_sentence(sentence, jsonobj))
+            testcp = test.copy()
+            clustersentences.append(testcp)
             if (firstsentence):
                 sentencetriplets = test
                 firstsentence = False
@@ -176,8 +180,9 @@ class conceptmap(object):
             with open(tripletsFile, 'w') as f:
                 f.write(str(sentencetriplets))
         if plotConceptMap:
-            visualize.plotGraph(sentencetriplets)
-        
+            if(separateClusters):visualize.plot_graphclusters(clustersentences)
+            else: visualize.plotGraph(sentencetriplets)
+
     
 if __name__ == '__main__':
     jsonFile = os.path.join(util.get_path('jsonessays'), 'rubric_o2.json')
@@ -185,7 +190,7 @@ if __name__ == '__main__':
     summaryFile = os.path.join(outputdir, 'rubric.txt')
     with open(summaryFile, 'r') as f:
         summarytext = f.read()
-    conceptmap.generate_conceptmap(summarytext, outputdir, plotConceptMap=True, savetriplets=False)
+    conceptmap.generate_conceptmap(summarytext, outputdir, plotConceptMap=True, savetriplets=False, separateClusters=True)
     #===========================================================================
     # jsonobj = conceptmap.open_text_json(jsonFile)
     # ngramids, ngramtext, ngrampos = conceptmap.retrieve_ngram_params(jsonobj)

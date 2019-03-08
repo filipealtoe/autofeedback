@@ -77,4 +77,4 @@ if __name__ == '__main__':
         print ('Rubric File created...')
         print ('Similarity value of selected rubric: ' + str(rubricresults['maxsimilarity']))
     #Generating Concept
-    #conceptmap.generate_conceptmap(rubricresults['rubrictext'], rubric_path, plotConceptMap=True)
+    conceptmap.generate_conceptmap(rubricresults['rubrictext'], rubric_path, plotConceptMap=True)

@@ -1,0 +1,9 @@
+The goal of GDPR is to enable the people in the European Union to retain control of their personal data and have the option to either provide or withdraw their consent to use a service as opposed to the service assuming consent. Some of the main things GDPR governs with regards to the use of personal data to personalize user experiences include.
+
+Processing of non-sensitive personal data does not require explicit consent from a user unambiguous consent is acceptable.
+Processing of sensitive personal data DOES require explicit consent from the users 
+All requests for consent need to be clear, easy to read, easy to access, and as easy to opt out of as it is to opt in to
+Data processors which aim to personalize user experience using personal data need to remain compliant and must demonstrate how the data subject has consented to the processing of their personal data.
+
+Since GDPR aims to place protections around people's personal data, this has had a big impact on AI which relies on copious amounts of data to learn. ML for example requires huge training data sets to build better classifiers. With the advantages that AI and ML bring, they have been adopted into a wide variety of fields and specializations, including those that deal with people's personal data. With GDPR though, there is more sensitivity around the use of people's data and how they may
+be used by ML and AI agents. Not only is it easier for people to opt out of providing their data or pulling out their personal data, but also if the data is not used by the agents exactly as is described to the users, then this could be a breach of GDPR compliance. This can be especially difficult with AI and ML since algorithmic transparency means you can see how the decision is reached, but you can't with systems because it's not rule-based software.
