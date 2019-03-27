@@ -17,9 +17,9 @@ class visualize(object):
         Constructor
         '''
     @staticmethod
-    def plotGraph(triplets):    
+    def plotGraph(triplets, filename = 'unix.gv'):    
 
-        u = Digraph('unix', filename='unix.gv')
+        u = Digraph('unix', filename=filename)
         u.attr(size='6,6')
         u.node_attr.update(color='lightblue2', style='filled')
         try:
@@ -33,7 +33,7 @@ class visualize(object):
                 try:
                     secondedge = triplet[2]['text']
                 except:
-                    secondedge = ''
+                    secondedge = triplet[0]['text']
                 u.edge(firstedge, secondedge, label=label)
                 i += 1
         except:
@@ -41,13 +41,14 @@ class visualize(object):
         u.view()
     
     @staticmethod
-    def plot_graphclusters(concepttriplets):
+    def plot_graphclusters(concepttriplets, filename = 'unix.gv'):
 
         try:
             i = 1
             allfiles = []
+            
             for cluster in concepttriplets:
-                filename='unix' + str(i) + '.gv'
+                filename=filename.split(".")[0] + str(i) + '.gv'
                 allfiles.append(filename)
                 u = Digraph('unix', filename)
                 u.attr(size='6,6')
@@ -61,7 +62,7 @@ class visualize(object):
                     try:
                         secondedge = triplet[2]['text']
                     except:
-                        secondedge = ''
+                        secondedge = triplet[0]['text']
                     u.edge(firstedge, secondedge, label=label)
                 i += 1
                 u.render(filename)

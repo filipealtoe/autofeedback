@@ -8,6 +8,7 @@ import os
 import json
 import numpy as np
 from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.corpus import stopwords
 from operator import itemgetter
 from visualize import visualize
 from summary import summary
@@ -72,13 +73,32 @@ class conceptmap(object):
         starttoken = '{'
         endtoken = '}'
         processedtext = sentence.lower()
-        processedtext = word_tokenize(processedtext)
         concepts = []
+        #concatenate some custom stop words to Wordnet stopwords
+        custom_stopwords = ['of course', 'in order']
+        for stopword in custom_stopwords:
+            processedtext = processedtext.replace(stopword, '')
+        stop_words = custom_stopwords + list(stopwords.words('english'))
+        #Remove stop words
+        processedtext = word_tokenize(processedtext)
+        processedtext = [w for w in processedtext if not w in stop_words]
         #Replace all concepts with their tag ids and pos
+        previous_word = ''
         for word in processedtext:
             for concept in jsonobj:
                 if (concept['text'] == word):
-                    concepts.append(concept)
+                    try:
+                        if (concept['pos'] == concepts[-1]['pos']) and (previous_word != 'and'):
+                            if (concept['pos'][0] == 'v'): #If it is a verb, add 'and'
+                                connectingword = ' and '
+                            else:
+                                connectingword = ' '
+                            concepts[-1]['text'] += connectingword + concept['text']
+                        else:
+                            concepts.append(concept)
+                    except:
+                        concepts.append(concept)
+            previous_word = word
         #create node triplets [n (or v-n), v, n]                
         sentencetriplets = conceptmap.create_triplets(concepts)
         return sentencetriplets
@@ -89,7 +109,7 @@ class conceptmap(object):
         create node triplets [n , v, n] or [v, n, n] where n, v, n are full concept structures
         '''
         noum = 'n'
-        propernoum = 'np'
+        propernoum = 'nnp'
         verb = 'v'
         triplets = []
         triplet = []
@@ -99,7 +119,7 @@ class conceptmap(object):
             if (concept['pos'][0] == verb):
                 #Gets the np pos associated with initial verb
                 for nextconcept in concepts:
-                    if(nextconcept['pos'][0] == noum):
+                    if(nextconcept['pos'] == propernoum): #if(nextconcept['pos'][0] == noum)
                         nextconcept = concepts.pop(0)
                         triplet.append(nextconcept)
                         triplet.append(concept)
@@ -117,11 +137,19 @@ class conceptmap(object):
                 if(concepts[0]['pos'][0] == noum):
                     triplet.append(concept)
                     triplet.append(None)
-                    triplet.append(concepts[0])
+                    if (concept['pos'] == propernoum):
+                        concept = concepts.pop(0)
+                    else:
+                        concept = concepts[0]
+                    triplet.append(concept)
+                    #If next concept is a verb, associate in between the two noums
+                    if (concepts[0]['pos'][0] == verb):
+                        concept = concepts.pop(0)
+                        triplet[1] = concept
                     triplets.append(triplet)
                     triplet = []
                     continue
-                #Gets the verb associated with initial verb
+                #Gets the verb associated with initial noum
                 for nextconcept in concepts:
                     if(nextconcept['pos'][0] == verb):
                         nextconcept = concepts.pop(0)
@@ -131,20 +159,38 @@ class conceptmap(object):
                 #Gets next noun to complete triplet
                 for nextconcept in concepts:
                     if(nextconcept['pos'][0] == noum):
-                        nextconcept = concepts.pop(0)
-                        triplet.append(nextconcept)
-                        break
+                        try:
+                            if ((nextconcept['pos'] != propernoum) and (nextconcept['pos'] != 'nns') and (concepts[1]['pos'][0] != noum)): #Only removes from list if not proper noum and next concept is not another noum
+                                nextconcept = concepts.pop(0)
+                            triplet.append(nextconcept)
+                            break
+                        except: print
                 triplets.append(triplet)
                 #if next concept is another noum, it needs to be associated to the same previous verb    
-                for nextconcept in concepts:
-                    if(nextconcept['pos'][0] == noum):
-                        nexttriplet = triplet.copy()
-                        nexttriplet[2] = nextconcept
-                        triplets.append(nexttriplet)
-                        triplet = []
-                        nexttriplet = []
-                        break
-            
+                #===============================================================
+                # for nextconcept in concepts:
+                #     if(nextconcept['pos'][0] == noum):
+                #         nexttriplet = triplet.copy()
+                #         nexttriplet[2] = nextconcept
+                #         triplets.append(nexttriplet)
+                #         triplet = []
+                #         nexttriplet = []
+                #         break
+                #===============================================================
+                #===============================================================
+                # try:
+                #     if ((concepts[0]['pos'][0] == noum) and (concepts[0]['pos'] != propernoum)):
+                #         nexttriplet = triplet.copy()
+                #         nexttriplet[2] = nextconcept
+                #         triplets.append(nexttriplet)
+                #     triplet = []s
+                #     nexttriplet = []
+                # except: 
+                #     triplet = []
+                #     nexttriplet = []
+                #===============================================================
+            triplet = []
+            nexttriplet = []
         return triplets
     
     @staticmethod
@@ -152,7 +198,7 @@ class conceptmap(object):
         pass
     
     @staticmethod
-    def generate_conceptmap(summarytext, outputdir, plotConceptMap=True, savetriplets=False, separateClusters=False):
+    def generate_conceptmap(summarytext, outputdir, plotConceptMap=True, savetriplets=False, separateClusters=False, mapfile = 'unix.gv'):
         '''
         This is the main method that will generate the concept map based on the supplied input text
         '''
@@ -180,8 +226,8 @@ class conceptmap(object):
             with open(tripletsFile, 'w') as f:
                 f.write(str(sentencetriplets))
         if plotConceptMap:
-            if(separateClusters):visualize.plot_graphclusters(clustersentences)
-            else: visualize.plotGraph(sentencetriplets)
+            if(separateClusters):visualize.plot_graphclusters(clustersentences, mapfile)
+            else: visualize.plotGraph(sentencetriplets, mapfile)
 
     
 if __name__ == '__main__':
@@ -190,7 +236,7 @@ if __name__ == '__main__':
     summaryFile = os.path.join(outputdir, 'rubric.txt')
     with open(summaryFile, 'r') as f:
         summarytext = f.read()
-    conceptmap.generate_conceptmap(summarytext, outputdir, plotConceptMap=True, savetriplets=False, separateClusters=True)
+    conceptmap.generate_conceptmap(summarytext, outputdir, plotConceptMap=True, savetriplets=False, separateClusters=False)
     #===========================================================================
     # jsonobj = conceptmap.open_text_json(jsonFile)
     # ngramids, ngramtext, ngrampos = conceptmap.retrieve_ngram_params(jsonobj)
