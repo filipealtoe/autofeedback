@@ -1,5 +1,8 @@
 # autofeedback
-Python code implementing auto-generation of feedback on essays via concept map.
+Python code implementing auto-generation of feedback on essays via concept map published on IEEE LWMOOCS 2019.
+
+To cite the paper:
+Altoe, F., & Joyner, D. (2019, October). Annotation-free automatic examination essay feedback generation. In 2019 IEEE Learning With MOOCS (LWMOOCS) (pp. 110-115). IEEE.
 
 The project is the development of a tool to automatically generate rubric for examination types of essays based on exemplary essays and the utilization of the automatically generated rubric to provide quality and immediate feedback to students on their examination essay submissions. The generated tool is not intended to serve as a commercial application, but as a research support tool. It shall be used to further explore the topic of an artificial intelligence-driven framework for the automatic generation of high-quality feedback on examination essays to students, an open problem in the research community.
 
